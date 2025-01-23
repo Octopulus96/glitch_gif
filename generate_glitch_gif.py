@@ -1,11 +1,14 @@
 import os
 import random
 import numpy as np
+from typing import List, Optional
 from PIL import Image, ImageDraw
 import imageio
 
 
-def generate_glitch_frame(width, height, colors):
+def generate_glitch_frame(
+    width: int, height: int, colors: List[tuple[int, int, int]]
+) -> Image.Image:
     """Создает кадр с глитч-эффектом."""
     frame = Image.new("RGB", (width, height), color=random.choice(colors))
     draw = ImageDraw.Draw(frame)
@@ -28,7 +31,13 @@ def generate_glitch_frame(width, height, colors):
     return Image.fromarray(np_frame.astype("uint8"))
 
 
-def generate_glitch_gif(output_path, width=500, height=500, frames=30, colors=None):
+def generate_glitch_gif(
+    output_path: str,
+    width: int = 500,
+    height: int = 500,
+    frames: int = 30,
+    colors: Optional[List[tuple[int, int, int]]] = None,
+) -> None:
     """Генерирует GIF с глитч-эффектом."""
     if colors is None:
         colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (0, 0, 0), (255, 255, 255)]
