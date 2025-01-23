@@ -23,6 +23,16 @@ def generate_glitch_frame(
         color = random.choice(colors)
         draw.rectangle([x_start, y_start, x_end, y_end], fill=color)
 
+    # Добавляем случайные вертикальные полосы и искажения
+    for _ in range(random.randint(5, 20)):
+        x_start = random.randint(0, width - 1)
+        y_start = random.randint(0, height - 1)
+        x_end = x_start + random.randint(1, 10)  # Вертикальные полосы
+        y_end = random.randint(y_start, height)
+
+        color = random.choice(colors)
+        draw.rectangle([x_start, y_start, x_end, y_end], fill=color)
+
     # Добавляем шум
     np_frame = np.array(frame)
     noise = np.random.randint(0, 50, (height, width, 3), dtype=np.uint8)
