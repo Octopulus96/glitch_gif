@@ -12,7 +12,6 @@ class GlitchArtGenerator:
         height: int = 500,
         colors: Optional[List[tuple[int, int, int]]] = None,
         frames: int = 30,
-        noise: bool = False,
     ):
         """Инициализация генератора глитч-арта."""
         self.width = width
@@ -26,7 +25,6 @@ class GlitchArtGenerator:
             ]
         )
         self.frames = frames
-        self.noise = noise
 
     def add_noise(self, frame: Image.Image) -> Image.Image:
         """Добавляет шум к кадру."""
@@ -105,11 +103,7 @@ class GlitchArtGenerator:
 
         # Добавляем шум
         frame_with_noise = self.add_noise(frame)
-        if self.noise == True:
-            frame_with_noise = self.add_noise(frame)
-            return frame_with_noise
-        else:
-            return frame
+        return frame_with_noise
 
     def generate_glitch_gif(self, output_path: str) -> None:
         """Генерирует GIF с глитч-эффектом."""
